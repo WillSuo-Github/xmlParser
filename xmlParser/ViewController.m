@@ -22,7 +22,6 @@
     [self loadHTMLWithWord:nil];
 }
 
-
 - (void)loadHTMLWithWord:(NSString *)word {
     //1.发送HTML请求, 得到返回的网页.(转换为字符串)
     NSString *urlString = [NSString stringWithFormat:@"http://news.baidu.com"];  //拼接请求网址
@@ -30,11 +29,8 @@
     NSURL *url = [NSURL URLWithString:urlString];  //得到URL
     
     NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:5.0f];
-    
-    
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler: ^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         //得到的data数据转换为字符串
-        
 //        NSLog(@"%@",data);
         
         NSStringEncoding enc = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
@@ -47,7 +43,6 @@
         NSArray *arr = [self findAnswerInHTML:html];
 
         NSLog(@"%@",arr);
-        
     }];  
 }
 
@@ -65,12 +60,9 @@
     NSRegularExpression *regex = [[NSRegularExpression alloc] initWithPattern:pattern options:NSRegularExpressionCaseInsensitive | NSRegularExpressionDotMatchesLineSeparators error:nil];
     
     //匹配出结果集
-
     NSArray *checkResultArr = [regex matchesInString:html options:NSMatchingReportCompletion range:NSMakeRange(0, html.length)];
     
     // 取出找到的内容. 数字分别对应第几个带括号(.*?), 取0时输出匹配到的整句.
-    
-
 //        NSLog(@"%@\n", [pattern substringWithRange:checkResult.range]);
         
 //        NSString *result = [html substringWithRange:[checkResult rangeAtIndex:0]];
@@ -89,8 +81,6 @@
 
         
     }
- 
-    
 //    NSLog(@"数据为----->%@", result);
     return arr;
 }
